@@ -1,0 +1,68 @@
+#Importing Requried Libraries
+import pandas as pd
+from matplotlib import pyplot as plt
+import seaborn as sns
+
+#Importing the csv file
+fifa=pd.read_csv('players_20.csv')
+
+#Inspecting the top 5 rows of the dataset 
+fifa.head()
+
+#Inspecting the Columns of the dataset
+for col in fifa.columns:
+    print(col)
+
+#Checking the size of the dataset
+fifa.shape
+
+#Checking the count of the nationalites column and importing only the nationality column
+fifa['nationality'].value_counts()[0:5].keys()
+
+#Plotting a bar graph of the top 5 nationality count
+plt.figure()
+plt.bar(fifa['nationality'].value_counts()[0:5].keys(),fifa['nationality'].value_counts()[0:5],color='g')
+plt.show()
+
+#extracting the names and wages column and getting the top 10 rows
+player_salary=fifa[['short_name','wage_eur']]
+player_salary[0:10]
+
+#sorting the playears by wage and getting the top ten earners
+player_salary=player_salary.sort_values(by=['wage_eur'],ascending =False)
+player_salary[0:10]
+
+#Plotting a bar graph with the x axis showing the names and the y axis shoeing the wages
+plt.figure()
+plt.bar(player_salary['short_name'][0:5],player_salary['wage_eur'][0:5])
+plt.show()
+
+#Flitering the list and showing only German players
+germany=fifa[fifa['nationality']=='Germany']
+germany
+
+germany.head()
+
+germany.sort_values(by=['height_cm'],ascending =True).head()
+
+
+germany.sort_values(by=['weight_kg'],ascending=False)
+
+germany[['short_name','wage_eur']].sort_values(by=['wage_eur'],ascending=False).head()
+
+player_shooting=fifa[['short_name','shooting']]
+
+
+player_shooting.sort_values(by=['shooting'],ascending=False).head()
+
+player_defending=fifa[['short_name','defending','nationality','club']]
+
+player_defending.sort_values(by=['defending'],ascending=False).head()
+
+realmadrid=fifa[fifa['club']=='Real Madrid']
+
+realmadrid.sort_values(by=['wage_eur'],ascending=False).head()
+
+
+realmadrid.sort_values(by=['shooting'],ascending=False).head()
+
